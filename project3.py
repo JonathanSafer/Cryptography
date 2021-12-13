@@ -19,13 +19,24 @@ def EEA(num1, num2):
 		q[i-1] = (r[i-2] - r[i])/r[i-1]
 		s[i] = s[i-2] - (q[i-1] * s[i-1])
 		t[i] = t[i-2] - (q[i-1] * t[i-1])
-	print("gcd: ", r[i-1])
-	print("s: ", s[i-1])
-	print("t: ", t[i-1])
+	print("gcd:", r[i-1])
+	print("s:", s[i-1])
+	print("t:", t[i-1])
 	inverse = t[i-1]
 	if(inverse < 0):
 		inverse = r[0] + inverse
-	print("Inverse of " +str(r[1])+" is: " +str(inverse))
+	print("Inverse of " +str(r[1])+" is:" +str(inverse))
+
+def EA(num1, num2):
+	a = num1 if num1 > num2 else num2
+	b = num2 if num1 > num2 else num1
+	while(b != 0):
+		t = b
+		b = a % b
+		a = t
+	print("gcd:", a)
+	
+
 
 
 def MRT(p):
@@ -46,7 +57,7 @@ def MRT(p):
 				z = pow(z, 2, p)
 				print(z)
 				if(z == 1):
-					print(str(p)+" is composit2")
+					print(str(p)+" is composite2")
 					return
 			if(z != p-1):
 				print(str(p)+" is composite1")
@@ -54,12 +65,36 @@ def MRT(p):
 	print(str(p)+ " is probably prime")
 	return
 
+def powmod_sm(x, hdec, n):
+	#equivalent of built in pow(x, h, n)
+	h = bin(hdec)[2:]
+	r = x
+	for i in range(len(h)):
+		r = (r * r) % n
+		if(h[i] == 1):
+			r = (r*x) % n
+	print(x, "pow", hdec, "mod", n, "=", r, pow(x,hdec,n))
+
+
+
+
+
 def main():
-	#num1 = int(input("Enter first number for EEA: "))
-	#num2 = int(input("Enter second number for EEA: "))
-	#EEA(num1, num2)
-	num3 = int(input("Enter a number for MRT: "))
-	MRT(num3)
+	#num1 = int(input("Enter a number for EA: "))
+	#num2 = int(input("Enter a number for EA: "))
+	#EA(num1, num2)
+	#num3 = int(input("Enter first number for EEA: "))
+	#num4 = int(input("Enter second number for EEA: "))
+	#EEA(num3, num4)
+	#num5 = int(input("Enter a number for MRT: "))
+	#MRT(num5)
+	num6 = int(input("Enter a number for powmod (x): "))
+	num7 = int(input("Enter a number for powmod (h): "))
+	num8 = int(input("Enter a number for powmod (n): "))
+	powmod_sm(num6, num7, num8)
+
+
+
 
 if __name__ == '__main__':
 	main()
